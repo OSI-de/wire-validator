@@ -1,3 +1,7 @@
+import logging
+
+logger = logging.getLogger(__name__)
+
 def validate(wires):
     existing_wire = set()
     error_messages = []
@@ -9,6 +13,7 @@ def validate(wires):
         else:
             if wire in existing_wire:
                 error_messages.append(f'{wire} ist doppelt.')
+                logger.warning(f"Duplicate wire: {wire.wire}")
             existing_wire.add(wire)
         if section is None:
             error_messages.append(f'{wire} hat keinen Querschnitt.')
